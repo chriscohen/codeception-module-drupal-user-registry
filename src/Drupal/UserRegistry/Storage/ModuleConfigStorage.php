@@ -3,6 +3,7 @@
 namespace Codeception\Module\Drupal\UserRegistry\Storage;
 
 use Codeception\Module\Drupal\UserRegistry\DrupalTestUser;
+use Codeception\Exception\Configuration as ConfigException;
 use BadMethodCallException;
 
 /**
@@ -39,7 +40,7 @@ class ModuleConfigStorage implements StorageInterface
      * @param array $config
      *   Array containing the DrupalUserRegistry module configuration.
      *
-     * @throws BadMethodCallException
+     * @throws \Codeception\Exception\Configuration
      */
     public function __construct($config)
     {
@@ -48,6 +49,17 @@ class ModuleConfigStorage implements StorageInterface
         } else {
             $this->yaml = $config;
             $this->load();
+        }
+
+        if (isset($config['username-prefix'])) {
+            if (strlen($config['username-prefix']) < 4) {
+                throw new ConfigException(sprintf(
+                    "Drupal username prefix should contain at least 4 characters (%s).",
+                    $config['username-prefix']
+                ));
+            } else {
+                $this->drupalUsernamePrefix = (string) $config['username-prefix'];
+            }
         }
     }
 
@@ -81,7 +93,7 @@ class ModuleConfigStorage implements StorageInterface
             );
 
             // If user is marked as root user, save this to the user object.
-            if (isset($this->yaml['root']) && $this->yaml['root'] == 'true') {
+            if (isset($item['root']) && $item['root'] == true) {
                 $user->isRoot = true;
             }
 

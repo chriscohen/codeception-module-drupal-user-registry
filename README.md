@@ -50,13 +50,13 @@ This module currently uses Drush and Drush aliases to create, delete and add rol
 
 ## Installation
 
-This module is available on [Packagist](https://packagist.org/packages/pfaocle/codeception-module-drupal-user-registry) and can be installed with Composer:
+This module is available on [Packagist](https://packagist.org/packages/ixis/codeception-module-drupal-user-registry) and can be installed with Composer:
 
 ```json
 {
     "require": {
         "codeception/codeception": "2.0.*",
-        "ixis/codeception-module-drupal-user-registry": "dev-master"
+        "ixis/codeception-module-drupal-user-registry": "~0.1.1"
     }
 }
 ```
@@ -162,6 +162,12 @@ To run both suites:
 
 
 ## Contribute
+
+This module's code is managed with [git-flow (AVH Edition)](https://github.com/petervanderdoes/gitflow-avh).
+Releases are made on the **master** branch and should be tagged using
+[semantic versioning](http://semver.org/) and the format vx.y.z, e.g. v0.1.0
+
+Pull requests should be made to the **develop** branch.
 
 - Issue tracker: https://github.com/ixis/codeception-module-drupal-user-registry/issues
 - Source code: https://github.com/ixis/codeception-module-drupal-user-registry
